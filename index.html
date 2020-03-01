@@ -8,11 +8,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <!-- Bootstrap CSS -->
+    <!-- build:css css/main.css -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link href="css/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
-
+    <!-- endbuild -->
     <title>Ristorante Con Fusion</title>
 </head>
 
@@ -31,7 +32,7 @@
                     <li class="nav-item"><a class="nav-link" href="./contactus.html"><span class="fa fa-address-card fa-lg"></span> Contact Us</a>
                 </ul>
                 <span class="navbar-text">
-                    <a data-toggle="modal" data-target="#loginModal">
+                    <a id="login_button">
                         <span class="fa fa-sign-in"> Login</span>
                     </a>
                 </span>
@@ -176,8 +177,8 @@
                     <img src="img/logo.png" class="img-fluid">
                 </div>
                 <div class="col-12 col-sm-3 align-self-center">
-                    <a style="text-decoration: none;"><button class="btn btn-block btn-warning" 
-                        data-toggle="modal" data-target="#reserveTableModal" type="button">Reserve Table</button></a>
+                    <a style="text-decoration: none;"><button id="reserveTableButton" class="btn btn-block btn-warning" 
+                     type="button">Reserve Table</button></a>
                 </div>
             </div>
         </div>
@@ -332,10 +333,38 @@
     </footer>
 
       <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
-      <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
-      <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-      <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-      <script src="js/script.js"></script>
+      <!-- build:js js/main.js -->
+     <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
+     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+     <script>
+         $(document).ready(function() {
+    $('#mycarousel').carousel({interval:2000});
+    $("#carouselButton").click(function(){
+        if ($("#carouselButton").children("span").hasClass('fa-pause')) {
+            $("#mycarousel").carousel('pause');
+            $("#carouselButton").children("span").removeClass('fa-pause');
+            $("#carouselButton").children("span").addClass('fa-play');
+        }
+        else if ($("#carouselButton").children("span").hasClass('fa-play')){
+            $("#mycarousel").carousel('cycle');
+            $("#carouselButton").children("span").removeClass('fa-play');
+            $("#carouselButton").children("span").addClass('fa-pause');                    
+        }
+    });
+
+    $("#login_button").click(function() {
+        $('#loginModal').modal('toggle');
+    });
+
+    $("#reserveTableButton").click(function() {
+        $('#reserveTableModal').modal('toggle');
+    });
+
+
+})
+     </script>
+    <!-- endbuild -->
 </body>
 
 </html>
